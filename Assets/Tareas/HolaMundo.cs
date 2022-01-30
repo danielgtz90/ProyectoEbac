@@ -1,10 +1,15 @@
 using System;
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+
 
 namespace Tareas
 {
     public class HolaMundo : MonoBehaviour
     {
+       
+        
         // Start is called before the first frame update
         void Start()
         {
@@ -23,6 +28,7 @@ namespace Tareas
         private void FixedUpdate()
         {
             Debug.LogWarning("Hola desde Fixed Update cada 50 frames");
+            
         }
 
         private void LateUpdate()
@@ -38,6 +44,7 @@ namespace Tareas
         private void OnDisable()
         {
             Debug.LogWarning("Algo se Ha deshabilitado");
+            
         }
     }
 }
