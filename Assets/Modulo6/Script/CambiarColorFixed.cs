@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,18 +6,31 @@ using UnityEngine;
 public class CambiarColorFixed : MonoBehaviour
 {
     public GameObject prefabEsfera;
+    public Boolean valorEsfera;
+    
     // Start is called before the first frame update
     void Start()
     {
-        
+        valorEsfera = true;
     }
-
-    // Update is called once per frame
     void FixedUpdate()
     {
-        Debug.Log("Se crea color Random de esfera desde FixedUpdate");
-        //prefabEsfera.GetComponent()<MeshRenderer>();        //renderizamos objeto
         var meshRendererMaterial = prefabEsfera.GetComponent<MeshRenderer>().material; //agregamos material
-        meshRendererMaterial.color = new Color(UnityEngine.Random.value,UnityEngine.Random.value,UnityEngine.Random.value); //agregamos color
+        //Debug.Log(valorEsfera);
+        if (valorEsfera == true)
+        {
+            Debug.Log("True color blanco");
+            meshRendererMaterial.color = Color.white;
+            valorEsfera = false;
+        }
+        else
+        {
+            Debug.Log("False color negro");
+            meshRendererMaterial.color = Color.black;
+            valorEsfera = true;
+        }
+        //Debug.Log("Se crea color Random de esfera desde FixedUpdate");
+        //var meshRendererMaterial = prefabEsfera.GetComponent<MeshRenderer>().material; //agregamos material
+        //meshRendererMaterial.color = new Color(UnityEngine.Random.value,UnityEngine.Random.value,UnityEngine.Random.value); //agregamos color
     }
 }
