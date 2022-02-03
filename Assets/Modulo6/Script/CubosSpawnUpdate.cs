@@ -4,29 +4,30 @@ using UnityEngine;
 
 public class CubosSpawnUpdate : MonoBehaviour
 {
-    public GameObject PrefabCube;
-    public List<GameObject> listacubos;
+    public GameObject prefabCubo;
+    public List<GameObject> listaesferas;
     public float factordeescalamiento;
-    public int numCubos = 0;
+    public int numEsferas = 0;
+
     // Start is called before the first frame update
     void Start()
     {
-        listacubos = new List<GameObject>();
+        listaesferas = new List<GameObject>();
         Debug.Log("Se generan cubos desde Update");
     }
 
     // Update is called once per frame
     void Update()
     {
-        numCubos++;
-        GameObject tempGameObject = Instantiate<GameObject>(PrefabCube);
-        tempGameObject.name = "Cubo Numero" + numCubos;
+        numEsferas++;
+        GameObject tempGameObject = Instantiate<GameObject>(prefabCubo);
+        tempGameObject.name = "EsferaNumero" + numEsferas;
         Color c = new Color(Random.value, Random.value, Random.value);
         tempGameObject.GetComponent<MeshRenderer>().material.color = c;
-        tempGameObject.transform.position = new Vector3(-5, 5, 0);
-        listacubos.Add(tempGameObject);
+        tempGameObject.transform.position = Random.insideUnitSphere;
+        listaesferas.Add(tempGameObject);
         List<GameObject> objetosparaeliminar = new List<GameObject>();
-        foreach (GameObject go in listacubos)
+        foreach (GameObject go in listaesferas)
 
         {
             float scale = go.transform.localScale.x;
@@ -41,7 +42,7 @@ public class CubosSpawnUpdate : MonoBehaviour
 
         foreach (GameObject go in objetosparaeliminar)
         {
-            listacubos.Remove(go);
+            listaesferas.Remove(go);
             Destroy(go);
             
         }

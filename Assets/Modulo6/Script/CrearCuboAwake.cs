@@ -9,56 +9,44 @@ namespace Modulo6.Script
 {
     public class CrearCuboAwake : MonoBehaviour
     {
-        private GameObject objToSpawn;
-
-        private Vector3[] vertices =
-        {
-            new Vector3(0, 0, 0), //Vertice 0    Puntos en el espacio para dibujar
-            new Vector3(1, 0, 0), //Vertice 1
-            new Vector3(1, 1, 0), //Vertice 2 
-            new Vector3(0, 1, 0), //Vertice 3
-            new Vector3(0, 1, 1), //Vertice 4
-            new Vector3(1, 1, 1), //Vertice 5
-            new Vector3(1, 0, 1), //Vertice 6
-            new Vector3(0, 0, 1), //Vertice 7
-        };
-
-        private int[] triangulos =
-        {
-            0, 2, 1, //Cara 1
-            0, 3, 2, //Cara 1.1  2 triangulos por cara para formar cuadro 2d
-            2, 3, 4, //Cara 2    Cada vector 
-            2, 4, 5, //Cara 2.1
-            1, 2, 5, //Cara 3
-            1, 5, 6, //Cara 3.1
-            0, 7, 4, //Cara 4
-            0, 4, 3, //Cara 4.1
-            5, 4, 7, //Cara 5
-            5, 7, 6, //Cara 5.1
-            0, 6, 7, //Cara 6
-            0, 1, 6, //Cara 6.1
-
-        };
-        
+        public GameObject prefabCubo;
+        public List<GameObject> listaesferas;
+        public float factordeescalamiento;
+        public int numEsferas = 0;
+       
         // Start is called before the first frame update
         private void Awake()
         {
-            objToSpawn = new GameObject("Cubo desde Awake"); // Object to spawn es como aparecer objeto 
-            objToSpawn.AddComponent<MeshFilter>();              //agregamos componentes
-            var meshFilter = objToSpawn.GetComponent<MeshFilter>().mesh;
-            meshFilter.Clear();                                 //Borrar movimientos por frames?    
-            meshFilter.vertices = vertices;                     //Asignamos Vertices a variable mesh
-            meshFilter.triangles = triangulos;                  //Asignamos Lineas-triangulos
-            meshFilter.Optimize();
-            meshFilter.RecalculateNormals();                    //
-            objToSpawn.AddComponent<BoxCollider>();             //Agregamos Componente
-            var boxCollider = objToSpawn.GetComponent<BoxCollider>();
-            boxCollider.center = new Vector3(0.5f, 0.5f, 0.5f);// movemos de posicion de origen al centro con valores float
-            objToSpawn.AddComponent<MeshRenderer>();        //renderizamos objeto
-            var meshRendererMaterial = objToSpawn.GetComponent<MeshRenderer>().material; //agregamos material
-            meshRendererMaterial.color = new Color(UnityEngine.Random.value,UnityEngine.Random.value,UnityEngine.Random.value); //agregamos color
-            objToSpawn.transform.position =new Vector3(5,5,5); //movemos posicion de cubo
-            Debug.Log("Se crea cubo azul desde Awake");
+            listaesferas = new List<GameObject>();
+            numEsferas++;
+            GameObject tempGameObject = Instantiate<GameObject>(prefabCubo);
+            tempGameObject.name = "EsferaNumero" + numEsferas;
+            Color c = new Color(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value);
+            tempGameObject.GetComponent<MeshRenderer>().material.color = c;
+            tempGameObject.transform.position = UnityEngine.Random.insideUnitSphere;
+            listaesferas.Add(tempGameObject);
+            List<GameObject> objetosparaeliminar = new List<GameObject>();
+            foreach (GameObject go in listaesferas)
+
+            {
+                float scale = go.transform.localScale.x;
+                scale *= factordeescalamiento;
+                go.transform.localScale=Vector3.one*scale;
+
+                if (scale<=0.5)
+                {
+                    objetosparaeliminar.Add(go);
+                }
+            }
+
+            foreach (GameObject go in objetosparaeliminar)
+            {
+                listaesferas.Remove(go);
+                Destroy(go);
+            
+            }
+            
+            Debug.Log("Se crea cubo desde Awake");
         }
 
         
