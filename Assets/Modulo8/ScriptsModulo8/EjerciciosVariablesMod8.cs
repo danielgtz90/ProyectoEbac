@@ -58,7 +58,7 @@ namespace Modulo8.ScriptsModulo8
             Debug.LogWarning(numeroParse1);
             int.TryParse(numero2.ToString(), out numeroParse2);
             Debug.LogWarning(numeroParse2);
-            int operacion = 0;
+            int operacion;
             operacion = numeroParse1 + numeroParse2;
             Debug.LogWarning(operacion);
             //
