@@ -46,6 +46,7 @@ namespace Modulo9
                                                    {1},
                                                    {10}};
             int[,] miMatriz3 = new int[2,1];
+            int n = 0;
 
             for (int i = 0; i <= 1; i++)
             {
@@ -53,18 +54,15 @@ namespace Modulo9
                 {
                     miMatriz3[i,0] += miMatriz2D[i, j] * unidemensional[j,0];
                 }
-                Debug.Log( "Valor " + i +",0 : " + miMatriz3[i,0]);
+                
             }
             
-            
-            
-            
-        }
+            do
+            {
+                Debug.Log("Valor " + n + ",0 : " + miMatriz3[n, 0]);
+                n++;
+            } while (n<=1);
 
-        // Update is called once per frame
-        void Update()
-        {
-        
         }
     }
 }
