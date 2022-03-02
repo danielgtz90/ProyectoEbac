@@ -20,8 +20,23 @@ public class EjerciciosEstructuras : MonoBehaviour
         despensa.Push("jamon");
         despensa.Push("huevos");
         despensa.Push("carne");
+
+        int a = despensa.Count;
+        for (int i = 0; i < a; i++)
+        {
+            var entrada = despensa.Peek();
+            Debug.Log("Despensa desde Stack:" + " " + entrada);
+            despensa1.Enqueue(entrada);
+            despensa.Pop();
+        }
+
+        foreach (var VARIABLE in despensa1)
+        {
+            Debug.Log("despensa desde Queue:" + " "  + VARIABLE);
+        }
+
         
-        Debug.Log(despensa.Peek());
+        /*Debug.Log(despensa.Peek());
         despensa1.Enqueue(despensa.Peek()); 
         despensa.Pop();
         
@@ -39,11 +54,12 @@ public class EjerciciosEstructuras : MonoBehaviour
         
         Debug.Log(despensa.Peek());
         despensa1.Enqueue(despensa.Peek());
-        despensa.Pop();
-        foreach (string elemento in despensa1)
+        despensa.Pop();*/
+        
+        /*foreach (string elemento in despensa1)
         {
             Debug.Log(elemento);
-        }
+        }*/
         
         
         
